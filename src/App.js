@@ -1,37 +1,31 @@
-import { useState } from "react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Suspense } from "react";
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { routes } from "./lazyLoad/routes";
 
-import AllMeetupsPage from "./pages/AllMeetupsPage";
-import FavoritesPage from "./pages/Favorites";
-import NewMeetupsPage from "./pages/NewMeetup";
-import { ALL_MEETUP_PAGE, FAVORITES_PAGE, NEW_MEETUP_PAGE } from "./utils/constants";
-
-import MainNavigation from "./components/layout/MainNavigation";
 import Layout from "./components/layout/Layout";
+import MainNavigation from "./components/layout/MainNavigation";
+
+const queryClient = new QueryClient();
 
 function App() {
-  const [page, setPage] = useState(ALL_MEETUP_PAGE);
-
-  function getCurrentPageComponent() {
-    let currentPageComponent = <AllMeetupsPage />;
-    switch (page) {
-      case FAVORITES_PAGE:
-        currentPageComponent = <FavoritesPage />;
-        break;
-      case NEW_MEETUP_PAGE:
-        currentPageComponent = <NewMeetupsPage />;
-        break;
-      default:
-        currentPageComponent = <AllMeetupsPage />;
-    }
-
-    return currentPageComponent;
-  }
-
   return (
-    <div data-test="app">
-      <MainNavigation setPage={setPage} />
-      <Layout>{getCurrentPageComponent()}</Layout>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <div data-test="app">
+          <MainNavigation />
+          <Layout>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                {routes.map(({ path, element: Element }) => (
+                  <Route key={path} path={path} element={<Element />}></Route>
+                ))}
+              </Routes>
+            </Suspense>
+          </Layout>
+        </div>
+      </Router>
+    </QueryClientProvider>
   );
 }
 
