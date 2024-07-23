@@ -24,13 +24,14 @@ You need a supabase url and anon key to be able to run this project with one sin
 - favorite (bool)
 
 And add it to a .env file as:
+```
 REACT_APP_SUPABASE_URL= my_url
 REACT_APP_SUPABASE_ANON_KEY= my_anon_key
+```
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
