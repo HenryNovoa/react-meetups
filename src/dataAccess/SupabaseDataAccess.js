@@ -12,17 +12,6 @@ class SupabaseDataAccess extends DataAccessInterface {
     constructor(url, key) {
         super()
         this.client = createClient(url, key)
-        this.testConnection()
-    }
-
-    async testConnection() {
-        try {
-            const { data, error } = await this.client.from('meetups').select('count')
-            if (error) throw error
-            console.log('Connection successful. Row count:', data[0].count)
-        } catch (error) {
-            console.error('Connection test failed:', error)
-        }
     }
 
     async getAll(table) {
@@ -30,7 +19,6 @@ class SupabaseDataAccess extends DataAccessInterface {
         if (error) throw error
         return data
     }
-
 
     async update(table, id, updates) {
         let { data, error } = await this.client.from(table).update(updates).eq('id', id).select()

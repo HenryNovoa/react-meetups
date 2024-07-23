@@ -12,7 +12,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <div data-test="app">
+        <div data-testid="app">
           <MainNavigation />
           <Layout>
             <Suspense fallback={<div>Loading...</div>}>

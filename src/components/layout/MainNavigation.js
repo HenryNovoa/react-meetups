@@ -11,7 +11,7 @@ export default function MainNavigation() {
 
   const favoriteCount = favoriteMeetups ? favoriteMeetups.length : 0;
   return (
-    <header className={`${classes.header} ${scrollDirection === 'down' ? classes.hide : ''}`} data-test="navigation-header">
+    <header className={`${classes.header} ${scrollDirection === 'down' ? classes.hide : ''}`} data-testid="navigation-header">
       <div className={classes.logo}>
         React Meetups
       </div>
