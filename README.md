@@ -31,7 +31,11 @@ REACT_APP_SUPABASE_ANON_KEY= my_anon_key
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.
+Launches the unit test runner in the interactive watch mode.
+
+### `npm test:e2e`
+
+Runs cypress to excecute the end to end tests
 
 ### `npm run build`
 
