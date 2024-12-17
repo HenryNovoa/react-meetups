@@ -6,6 +6,11 @@
     justify-content: space-between;
     background-color: #77002e;
     padding: 0 10%;
+  
+    /* ... scroll direction ... */
+    position: sticky;
+    top: 0;
+    transition: transform 0.3s ease-in-out;
   }
   
   .logo {
@@ -44,4 +49,8 @@
     border-radius: 12px;
     padding: 0 1rem;
     margin-left: 0.5rem;
+  }
+
+  .hide {
+    transform: translateY(-100%);
   }

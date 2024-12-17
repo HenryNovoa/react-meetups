@@ -1,9 +1,9 @@
 /* eslint-disable testing-library/await-async-query */
 /* eslint-disable testing-library/no-debugging-utils */
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import App from "./App";
-import MainNavigation from "./components/layout/MainNavigation";
 import Layout from "./components/layout/Layout";
+import MainNavigation from "./components/layout/MainNavigation";
 
 /**
  * Factory funcion to create a ShallowWrapper for the App component
@@ -11,7 +11,7 @@ import Layout from "./components/layout/Layout";
  * @returns {ShallowWrapper}
  */
 const setup = () => shallow(<App />);
-const findByTestAttr = (wrapper, val) => wrapper.find(`[data-test]='${val}'`);
+const findByTestAttr = (wrapper, val) => wrapper.find(`[data-testid]='${val}'`);
 
 test("renders App without crashing", () => {
   const wrapper = setup();

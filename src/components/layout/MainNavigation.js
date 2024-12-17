@@ -1,29 +1,42 @@
-import { ALL_MEETUP_PAGE, FAVORITES_PAGE, NEW_MEETUP_PAGE } from "./../../utils/constants";
-
+import { NavLink } from 'react-router-dom';
+import { useFavoriteMeetups } from '../../util-hooks/useMeetupData';
+import useScrollDirection from "../../util-hooks/useScrollDirection";
 import classes from "./MainNavigation.module.css";
 
-export default function MainNavigation({ setPage }) {
+export default function MainNavigation() {
+  const scrollDirection = useScrollDirection()
+
+
+  const { data: favoriteMeetups } = useFavoriteMeetups();
+
+  const favoriteCount = favoriteMeetups ? favoriteMeetups.length : 0;
   return (
-    <header className={classes.header} data-test="navigation-header">
-      <div className={classes.logo}>React Meetups</div>
+    <header className={`${classes.header} ${scrollDirection === 'down' ? classes.hide : ''}`} data-testid="navigation-header">
+      <div className={classes.logo}>
+        React Meetups
+      </div>
       <nav>
         <ul>
           <li>
-            <a href="#" onClick={() => setPage(ALL_MEETUP_PAGE)}>
+            <NavLink
+              to='/'
+            >
               All Meetups
-            </a>
+            </NavLink>
           </li>
 
           <li>
-            <a href="#" onClick={() => setPage(NEW_MEETUP_PAGE)}>
+            <NavLink
+              to="new-meetup">
               Add New Meetup
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="#" onClick={() => setPage(FAVORITES_PAGE)}>
-              My Favorites
-              <span className={classes.badge}>{0}</span>
-            </a>
+            <NavLink
+              to="/favorites"
+            > My Favorites
+              <span className={classes.badge}>{favoriteCount}</span>
+            </NavLink>
           </li>
         </ul>
       </nav>
